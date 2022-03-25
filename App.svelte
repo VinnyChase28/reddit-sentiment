@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { supabase } from "./supabaseClient";
+  import Code from "./components/Code.svelte";
   import _ from "lodash";
   let arr2 = [];
   let barCharArray = [];
@@ -112,6 +113,14 @@
   <h5>
     Fetch the data from reddit -> scan the comment for tickers by comparing it
     to a list of tickers -> if found, push comment and ticker to DB
+  </h5>
+  <Code />
+
+  <h5>
+    We can now fetch the data and render it with svelte. That code can be found <a
+      target="_blank"
+      href="https://github.com/VinnyChase28/python-ticker-scraper">here</a
+    >
   </h5>
 
   <table class="graph">
