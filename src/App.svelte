@@ -96,66 +96,67 @@
 </script>
 
 <main>
-  <h1>Reddit Scraping & Bar Charts</h1>
-  <p>
-    Hi there, this is a portfolio project to showcase a few features. I created
-    a reddit python scraper <a
-      target="_blank"
-      href="https://github.com/VinnyChase28/python-ticker-scraper">here</a
-    >. The top 3 most popular stock subreddits are scraped using PRAW, a python
-    library. The start date is March 22, 2022. The ticker, time/date, and
-    comment are then stored in Supabase - which similar to Firebase. The total
-    results are then fetched from the SQL database on this page onMount, using
-    the Svelte Framework, which allows for nearly pure HTML, CSS, Javascript
-    code.
-  </p>
+  <div class="container">
+    <h1>Reddit Scraping & Bar Charts</h1>
+    <p>
+      Hi there, this is a portfolio project to showcase a few features. I
+      created a reddit python scraper <a
+        target="_blank"
+        href="https://github.com/VinnyChase28/python-ticker-scraper">here</a
+      >. The top 3 most popular stock subreddits are scraped using PRAW, a
+      python library. The start date is March 22, 2022. The ticker, time/date,
+      and comment are then stored in Supabase - which similar to Firebase. The
+      total results are then fetched from the SQL database on this page onMount,
+      using the Svelte Framework, which allows for nearly pure HTML, CSS,
+      Javascript code.
+    </p>
 
-  <h5>
-    Fetch the data from reddit -> scan the comment for tickers by comparing it
-    to a list of tickers -> if found, push comment and ticker to DB
-  </h5>
-  <Code />
+    <h5>
+      Fetch the data from reddit -> scan the comment for tickers by comparing it
+      to a list of tickers -> if found, push comment and ticker to DB
+    </h5>
+    <Code />
 
-  <h5>
-    We can now fetch the data and render it with svelte. That code can be found <a
-      target="_blank"
-      href="https://github.com/VinnyChase28/python-ticker-scraper">here</a
-    >
-  </h5>
+    <h5>
+      We can now fetch the data and render it with svelte. That code can be
+      found <a
+        target="_blank"
+        href="https://github.com/VinnyChase28/reddit-sentiment">here</a
+      >
+    </h5>
 
-  <table class="graph">
-    <thead>
-      <tr>
-        <th scope="col">Item</th>
-        <th scope="col">Percent</th>
-      </tr>
-    </thead>
+    <table class="graph">
+      <thead>
+        <tr>
+          <th scope="col">Item</th>
+          <th scope="col">Percent</th>
+        </tr>
+      </thead>
 
-    <tbody>
-      <tr style="height:{stock1Percentage}%">
-        <th scope="row">{stock1}</th>
-        <td><span>{stock1Percentage + "%"}</span></td>
-      </tr>
-      <tr style="height:{stock2Percentage}%">
-        <th scope="row">{stock2}</th>
-        <td><span>{stock2Percentage + "%"}</span></td>
-      </tr>
-      <tr style="height:{stock3Percentage}%">
-        <th scope="row">{stock3}</th>
-        <td><span>{stock3Percentage + "%"}</span></td>
-      </tr>
-      <tr style="height:{stock4Percentage}%">
-        <th scope="row">{stock4}</th>
-        <td><span>{stock4Percentage + "%"}</span></td>
-      </tr>
-      <tr style="height:{stock5Percentage}%">
-        <th scope="row">{stock5}</th>
-        <td><span>{stock5Percentage + "%"}</span></td>
-      </tr>
-    </tbody>
-  </table>
+      <tbody>
+        <tr style="height:{stock1Percentage}%">
+          <th scope="row">{stock1}</th>
+          <td><span>{stock1Percentage + "%"}</span></td>
+        </tr>
+        <tr style="height:{stock2Percentage}%">
+          <th scope="row">{stock2}</th>
+          <td><span>{stock2Percentage + "%"}</span></td>
+        </tr>
+        <tr style="height:{stock3Percentage}%">
+          <th scope="row">{stock3}</th>
+          <td><span>{stock3Percentage + "%"}</span></td>
+        </tr>
+        <tr style="height:{stock4Percentage}%">
+          <th scope="row">{stock4}</th>
+          <td><span>{stock4Percentage + "%"}</span></td>
+        </tr>
+        <tr style="height:{stock5Percentage}%">
+          <th scope="row">{stock5}</th>
+          <td><span>{stock5Percentage + "%"}</span></td>
+        </tr>
+      </tbody>
+    </table>
 
-  <div class="table-container">
     <table id="customers">
       <th>Ticker </th>
       <th>All Time Mentions </th>
@@ -181,8 +182,9 @@
   h1 {
     color: #ff3e00;
     text-transform: uppercase;
-    font-size: 4em;
+    font-size: 3em;
     font-weight: 100;
+    text-align: center;
   }
 
   /* barchart */
@@ -193,8 +195,6 @@
   }
 
   .graph caption {
-    font: bold 150%/120% arial, helvetica, sans-serif;
-    padding-bottom: 0.33em;
   }
 
   .graph tbody th {
@@ -207,6 +207,7 @@
         display: block;
         width: 600px;
         height: 300px;
+        margin-bottom: 100px;
       }
 
       .graph caption {
@@ -355,9 +356,12 @@
     border: 1px solid;
   }
 
-  .table-container {
-    margin-top: 100px;
+  .container {
     padding: 50px;
+    text-align: left;
+    align-items: center;
+    padding: 30px;
+    margin: 20px;
   }
 
   @media (min-width: 640px) {
