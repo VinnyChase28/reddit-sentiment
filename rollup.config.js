@@ -9,7 +9,7 @@ import css from "rollup-plugin-css-only";
 import { config } from "dotenv";
 import replace from "@rollup/plugin-replace";
 import json from "@rollup/plugin-json";
-
+import includeEnv from "svelte-environment-variables";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -78,6 +78,7 @@ export default {
           isProd: production,
           ...config().parsed, // attached the .env config
         },
+        ...includeEnv(),
       }),
       delimiters: ["", ""],
     }),

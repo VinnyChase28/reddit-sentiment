@@ -173,7 +173,7 @@
 <style>
   main {
     max-width: 240px;
-    margin: 0 auto;
+    margin: 200 auto;
   }
   td {
     height: 10px;
@@ -187,10 +187,17 @@
     text-align: center;
   }
 
+  .container {
+    padding: 50px;
+    text-align: left;
+    align-items: center;
+    padding: 30px;
+  }
+
   /* barchart */
 
   .graph {
-    margin-bottom: 1em;
+    margin-bottom: 0em;
     font: normal 100%/150% arial, helvetica, sans-serif;
   }
 
@@ -225,7 +232,6 @@
         column-gap: 2.5%;
         align-items: end;
         height: 100%;
-        margin: 3em 0 1em 2.8em;
         padding: 0 1em;
         border-bottom: 2px solid rgba(0, 0, 0, 0.5);
         background: repeating-linear-gradient(
@@ -354,14 +360,6 @@
   table {
     width: 100%;
     border: 1px solid;
-  }
-
-  .container {
-    padding: 50px;
-    text-align: left;
-    align-items: center;
-    padding: 30px;
-    margin: 20px;
   }
 
   @media (min-width: 640px) {
