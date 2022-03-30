@@ -35,6 +35,7 @@
       <li style="margin-left:2em; padding-bottom: 0;">ticker</li>
       <li style="margin-left:2em; padding-bottom: 0;">comment</li>
       <li style="margin-left:2em; padding-bottom: 0;">source</li>
+      <li style="margin-left:2em; padding-bottom: 0;">sentiment</li>
     </ul>
   </li>
   <li>

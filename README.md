@@ -11,6 +11,7 @@ Prerequisites:
   - ticker
   - comment
   - source
+  - sentiment
   - (Optional) A free Heroku account for scheduling scripts, you can also simply run the script locally
 
 ```bash
