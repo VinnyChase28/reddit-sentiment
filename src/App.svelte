@@ -215,7 +215,7 @@
       s5={stock5}
     />
 
-    <h3>Top 10 mentions (stocks):</h3>
+    <h3>Top 20 mentions (stocks):</h3>
 
     <table id="customers">
       <th>Ticker </th>
@@ -243,12 +243,12 @@
       s5={crypto5}
     />
 
-    <h3>Top 5 mentions (crypto):</h3>
+    <h3>Top 20 mentions (crypto):</h3>
 
     <table id="customers">
       <th>Ticker </th>
       <th>All Time Mentions </th>
-      {#each barCharArrayCrypto as { ticker, occurrence }}
+      {#each arrCrypto2 as { ticker, occurrence }}
         <tr>
           <td class="sent bar">{ticker}</td>
           <td>{occurrence}</td>
@@ -284,7 +284,7 @@
     border-collapse: collapse;
   }
 
-  tr:nth-child(n + 13) {
+  tr:nth-child(n + 23) {
     display: none;
   }
 
