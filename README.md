@@ -31,6 +31,8 @@ npm run dev
 ## Roadmap
 
 - Add sentiment analysis (reddit comments are already scraped and available, just need to implement) and set sentiment to "Bearish" or "Bullish" in Supabase
+- Display different graphs and overtime graphs
+- Makes comparisons of # of mentions to stock performance
 
 ## List of resources
 
