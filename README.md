@@ -22,7 +22,7 @@ npm install
 npm run dev
 ```
 
-![alt text](https://imgur.com/a/KeX96fY)
+![alt text](https://i.imgur.com/gP4mXwh.png)
 
 ## Known issues / bugs
 
