@@ -10,8 +10,11 @@ import { config } from "dotenv";
 import replace from "@rollup/plugin-replace";
 import json from "@rollup/plugin-json";
 import includeEnv from "svelte-environment-variables";
+import "dotenv/config";
 
 const production = !process.env.ROLLUP_WATCH;
+
+const { SVELTE_APP_SUPABASE_ANON_KEY, SVELTE_APP_SUPABASE_URL } = process.env;
 
 function serve() {
   let server;
@@ -77,6 +80,8 @@ export default {
         env: {
           isProd: production,
           ...config().parsed, // attached the .env config
+          SVELTE_APP_SUPABASE_ANON_KEY,
+          SVELTE_APP_SUPABASE_URL,
         },
         ...includeEnv(),
       }),
