@@ -33,6 +33,8 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^1.31.2",
+    "framework7": "^6.3.16",
+    "framework7-svelte": "^6.3.16",
     "lodash": "^4.17.21",
     "sirv-cli": "^2.0.0",
     "svelte-environment-variables": "^1.0.4"
