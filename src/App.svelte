@@ -4,6 +4,8 @@
   import Intro from "./components/Intro.svelte";
   import StockGraph from "./components/StockGraph.svelte";
   import _ from "lodash";
+  import Chart from "svelte-frappe-charts";
+
   let arr2 = [];
   let barCharArray = [];
   let stock1;
@@ -28,6 +30,23 @@
   let crypto3Percentage;
   let crypto4Percentage;
   let crypto5Percentage;
+
+  let navOpen = false;
+
+  function handleNav() {
+    navOpen = !navOpen;
+    // 		navWidth === 0 ? navWidth = 40 : navWidth = 0;
+    console.log("clicked", navOpen);
+  }
+
+  let data1 = {
+    labels: ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"],
+    datasets: [
+      {
+        values: [10, 12, 3, 9, 8, 15, 9],
+      },
+    ],
+  };
   onMount(async () => {
     const { data, error } = await supabase.from("ticker_mentions").select(`
     ticker,
@@ -195,6 +214,33 @@
 </svelte:head>
 
 <main>
+  <div>
+    <nav class="nav">
+      <a href="/" class="logo">logo</a>
+
+      <div class:change={navOpen} class="hamburger" on:click={handleNav}>
+        <span class="line" />
+        <span class="line" />
+        <span class="line" />
+      </div>
+
+      {#if navOpen === false}
+        <div class="nav__link hide">
+          <a href="#">home</a>
+          <a href="#">about</a>
+          <a href="#">contact</a>
+          <a href="#">blog</a>
+        </div>
+      {:else if navOpen === true}
+        <div class="nav__link">
+          <a href="#">home</a>
+          <a href="#">about</a>
+          <a href="#">contact</a>
+          <a href="#">blog</a>
+        </div>
+      {/if}
+    </nav>
+  </div>
   <div class="container">
     <Intro />
     <br />
@@ -214,7 +260,8 @@
       s4={stock4}
       s5={stock5}
     />
-
+    <p>test</p>
+    <Chart data={data1} type="line" />
     <h3>Top 20 mentions (stocks):</h3>
 
     <table id="customers">
@@ -260,12 +307,81 @@
 
 <style>
   main {
-    max-width: 240px;
-    margin: 200 auto;
-    justify-content: center;
-    align-items: center;
     font-family: "Montserrat", sans-serif;
+    background-color: #222222;
+    color: white;
   }
+
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: #ff3e00;
+    height: 100px;
+  }
+
+  .logo {
+    font-size: 1.8rem;
+    color: rgb(5, 5, 116);
+    padding-left: 20px;
+  }
+
+  .hamburger {
+    padding-right: 20px;
+    cursor: pointer;
+  }
+
+  .hamburger .line {
+    display: block;
+    width: 40px;
+    height: 5px;
+    margin-bottom: 10px;
+    background-color: white;
+  }
+
+  .nav__link {
+    position: fixed;
+    width: 94%;
+    top: 5rem;
+    left: 18px;
+    background-color: lightblue;
+  }
+
+  .nav__link a {
+    display: block;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  .nav__link a:hover {
+    background-color: lightcoral;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  @media screen and (min-width: 600px) {
+    .nav__link {
+      display: block;
+      position: static;
+      width: auto;
+      margin-right: 20px;
+      background: none;
+    }
+
+    .nav__link a {
+      display: inline-block;
+      padding: 15px 20px;
+      color: white;
+    }
+
+    .hamburger {
+      display: none;
+    }
+  }
+
   td {
     height: 10px;
   }
@@ -278,6 +394,11 @@
   h1 {
     color: #ff3e00;
     font-family: "Montserrat", sans-serif;
+    padding: 20px;
+  }
+  h3 {
+    font-family: "Montserrat", sans-serif;
+    padding: 20px;
   }
 
   table {
@@ -289,10 +410,8 @@
   }
 
   .container {
-    margin: auto;
-    width: 70%;
-    padding: 40px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    justify-content: center;
+    margin-top: 100px;
   }
 
   #customers {
