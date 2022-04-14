@@ -2,6 +2,7 @@
   export const intro = "all";
   import TickerCode from "./TickerCode.svelte";
   import CryptoCode from "./CryptoCode.svelte";
+  import AnimatedGraph from "./AnimatedGraph.svelte";
 </script>
 
 <h1>Reddit Scraping & Bar Charts</h1>
@@ -44,7 +45,13 @@
     > account for scheduling scripts, you can also simply run the script locally
   </li>
 </ul>
-
+<h3>Animation</h3>
+<div
+  class="flourish-embed flourish-bar-chart-race"
+  data-src="visualisation/9399885"
+>
+  <script src="https://public.flourish.studio/resources/embed.js"></script>
+</div>
 <h3>Stock Scraper:</h3>
 <TickerCode />
 <h3>Crypto Scraper:</h3>

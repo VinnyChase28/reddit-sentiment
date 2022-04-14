@@ -205,6 +205,18 @@
 
     arrCrypto2 = arrCrypto2; //do this because dummy svelte wants a re-render.
   });
+
+  //get stock over time data
+
+  onMount(async () => {
+    const { data, error } = await supabase.from("ticker_mentions").select(`
+    ticker,
+    comment,
+    created_at
+  `);
+    const response = await data;
+    console.log(response);
+  });
 </script>
 
 <svelte:head>
@@ -246,7 +258,7 @@
     <br />
     <h1>Data Analysis</h1>
     <br />
-    <h3>All time ticker mention percentage (stocks):</h3>
+    <h3>All time top 5 percentage (stocks):</h3>
 
     <StockGraph
       s1Percentage={stock1Percentage}
@@ -275,7 +287,7 @@
       {/each}
     </table>
     <br />
-    <h3>All time symbol mention percentage (crypto):</h3>
+    <h3>All time top 5 percentage (crypto):</h3>
 
     <StockGraph
       s1Percentage={crypto1Percentage}
@@ -345,7 +357,7 @@
     width: 94%;
     top: 5rem;
     left: 18px;
-    background-color: lightblue;
+    background-color: #222222;
   }
 
   .nav__link a {
@@ -355,7 +367,8 @@
   }
 
   .nav__link a:hover {
-    background-color: lightcoral;
+    background-color: white;
+    color: #ff3e00;
   }
 
   .hide {
@@ -427,7 +440,7 @@
   }
 
   #customers tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: black;
   }
 
   #customers tr:hover {

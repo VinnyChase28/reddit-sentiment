@@ -12,7 +12,7 @@ Prerequisites:
   - comment
   - source
   - sentiment
-  - (Optional) A free Heroku account for scheduling scripts, you can also simply run the script locally
+  - (Optional) A free Heroku account for scheduling cron jobs, you can also simply run the script locally
 
 ```bash
 npm install
