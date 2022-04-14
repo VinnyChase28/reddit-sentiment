@@ -272,7 +272,6 @@
       s4={stock4}
       s5={stock5}
     />
-    <p>test</p>
     <Chart data={data1} type="line" />
     <h3>Top 20 mentions (stocks):</h3>
 

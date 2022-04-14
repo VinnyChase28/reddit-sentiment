@@ -52,6 +52,7 @@
 >
   <script src="https://public.flourish.studio/resources/embed.js"></script>
 </div>
+<AnimatedGraph />
 <h3>Stock Scraper:</h3>
 <TickerCode />
 <h3>Crypto Scraper:</h3>
