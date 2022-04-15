@@ -17,15 +17,20 @@
 
 <h1>Reddit Scraping & Bar Charts</h1>
 <p>
-  This is a guide to show how to create a reddit python scraper. The top 3 most
-  popular stock subreddits as well as the top 3 crypto subreddits are scraped
+  This is a guide to show how to create a reddit python scraper. The top 6 most
+  popular stock subreddits as well as the top 6 crypto subreddits are scraped
   using PRAW, a python library to find how many times the tickers are mentioned.
   The comment is also recorded to do a sentiment analysis of the text. The
   sentiment analysis will try to determine if the user is "Bearish" or "Bullish"
-  about a particular stock or cryptocurrency. The start date of the Data is
-  March 22, 2022. The ticker, time/date, and comment are then stored in Supabase
-  - which similar to Firebase. The total results are then fetched from Supabase
-  and rendered here using the Svelte framework.
+  about a particular stock or cryptocurrency.
+</p>
+<p>
+  The start date of the Data is March 22, 2022. The ticker, time/date, and
+  comment are then stored in Supabase - which similar to Firebase. The total
+  results are then fetched from Supabase and rendered here using the Svelte
+  framework. This project is purely a way for me to practice charting and data
+  manipulation. Feel free to star this project or download if you you'd like to
+  test it!
 </p>
 
 <h3>Prerequisites:</h3>
@@ -55,7 +60,18 @@
     > account for scheduling scripts, you can also simply run the script locally
   </li>
 </ul>
-<h3>Animation</h3>
+<h3>Running stock mention numbers</h3>
+<iframe
+  bind:this={frame}
+  src="https://flo.uri.sh/visualisation/9399885/embed"
+  title="Interactive or visual content"
+  class="flourish-embed-iframe"
+  frameborder="0"
+  scrolling="no"
+  style="width:100%;height:600px;"
+  sandbox="allow-same-origin allow-forms allow-scripts allow-downloads allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
+/>
+<h3>Running crypto mention numbers</h3>
 <iframe
   bind:this={frame}
   src="https://flo.uri.sh/visualisation/9412445/embed"

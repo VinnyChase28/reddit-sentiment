@@ -48,11 +48,16 @@
     ],
   };
   onMount(async () => {
-    const { data, error } = await supabase.from("ticker_mentions").select(`
+    const { data, error } = await supabase
+      .from("ticker_mentions")
+      .select(
+        `
     ticker,
     comment,
     created_at
-  `);
+  `
+      )
+      .limit(100);
     const response = await data;
     function findOcc(arr, key) {
       arr.forEach((x) => {
@@ -128,11 +133,16 @@
 
   //get crypto data
   onMount(async () => {
-    const { data, error } = await supabase.from("crypto_mentions").select(`
+    const { data, error } = await supabase
+      .from("crypto_mentions")
+      .select(
+        `
     ticker,
     comment,
     created_at
-  `);
+  `
+      )
+      .limit(100);
     const response = await data;
     function findOcc(arr, key) {
       arr.forEach((x) => {
@@ -415,7 +425,7 @@
   }
   h3 {
     font-family: "Montserrat", sans-serif;
-    padding: 20px;
+    margin-bottom: 20px;
   }
 
   table {
