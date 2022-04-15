@@ -209,11 +209,16 @@
   //get stock over time data
 
   onMount(async () => {
-    const { data, error } = await supabase.from("ticker_mentions").select(`
+    const { data, error } = await supabase
+      .from("ticker_mentions")
+      .select(
+        `
     ticker,
     comment,
     created_at
-  `);
+  `
+      )
+      .limit(100);
     const response = await data;
     console.log(response);
   });

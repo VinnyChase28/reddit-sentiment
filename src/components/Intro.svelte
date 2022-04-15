@@ -3,6 +3,16 @@
   import TickerCode from "./TickerCode.svelte";
   import CryptoCode from "./CryptoCode.svelte";
   import AnimatedGraph from "./AnimatedGraph.svelte";
+  import { onMount } from "svelte";
+
+  let frame;
+  onMount(() => {
+    frame.addEventListener("load", onLoad());
+  });
+  function onLoad() {
+    const head = frame.contentDocument.querySelector("head");
+    console.log(head);
+  }
 </script>
 
 <h1>Reddit Scraping & Bar Charts</h1>
@@ -46,13 +56,17 @@
   </li>
 </ul>
 <h3>Animation</h3>
-<div
-  class="flourish-embed flourish-bar-chart-race"
-  data-src="visualisation/9399885"
->
-  <script src="https://public.flourish.studio/resources/embed.js"></script>
-</div>
-<AnimatedGraph />
+<iframe
+  bind:this={frame}
+  src="https://flo.uri.sh/visualisation/9412445/embed"
+  title="Interactive or visual content"
+  class="flourish-embed-iframe"
+  frameborder="0"
+  scrolling="no"
+  style="width:100%;height:600px;"
+  sandbox="allow-same-origin allow-forms allow-scripts allow-downloads allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
+/>
+
 <h3>Stock Scraper:</h3>
 <TickerCode />
 <h3>Crypto Scraper:</h3>
