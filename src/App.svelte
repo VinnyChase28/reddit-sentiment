@@ -253,17 +253,13 @@
 
       {#if navOpen === false}
         <div class="nav__link hide">
-          <a href="#">home</a>
-          <a href="#">about</a>
-          <a href="#">contact</a>
-          <a href="#">blog</a>
+          <a href="#">Playground</a>
+          <a href="#">Guide</a>
         </div>
       {:else if navOpen === true}
         <div class="nav__link">
-          <a href="#">home</a>
-          <a href="#">about</a>
-          <a href="#">contact</a>
-          <a href="#">blog</a>
+          <a href="#">Playground</a>
+          <a href="#">Guide</a>
         </div>
       {/if}
     </nav>
