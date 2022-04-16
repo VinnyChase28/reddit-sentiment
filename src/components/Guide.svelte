@@ -1,18 +1,25 @@
 <script>
-  export const intro = "all";
+  export const guide = "all";
   import TickerCode from "./TickerCode.svelte";
   import CryptoCode from "./CryptoCode.svelte";
   import { onMount } from "svelte";
   import Highlight from "svelte-highlight";
+  import bash from "svelte-highlight/languages/bash";
   import python from "svelte-highlight/languages/python";
-  import github from "svelte-highlight/styles/github";
-
-  const code = `from dotenv import load_dotenv
-import os
-import praw
-from praw.models import MoreComments
-from supabase import create_client, Client
-from stocksymbol import StockSymbol`;
+  import dracula from "svelte-highlight/styles/dracula";
+  import {
+    textOne,
+    textTwo,
+    textThree,
+    textFour,
+    bashOne,
+    bashTwo,
+    bashThree,
+    pythonOne,
+    pythonTwo,
+    env,
+  } from "./CodeData";
+  console.log(bashOne);
 
   let frame;
   onMount(() => {
@@ -25,7 +32,7 @@ from stocksymbol import StockSymbol`;
 </script>
 
 <svelte:head>
-  {@html github}
+  {@html dracula}
 </svelte:head>
 
 <h1>Finance forum scraping</h1>
@@ -79,37 +86,21 @@ from stocksymbol import StockSymbol`;
 </ul>
 <h3>Python project setup</h3>
 <p>
-  Cd into your preferred directory and create a new python project locally using
-  this command:
+  {textOne}
 </p>
-<pre><code class="language-plaintext">
-    mkdir python-scraper && cd python-scraper && touch to-csv-crypto.py to-csv-stocks.py ticker-scraper-crypto.py ticker-scraper-stocks.py
-  </code></pre>
+<Highlight language={bash} code={bashOne} />
 <p>
-  Create a virtual environment to avoid clogging up our global installations:
+  {textTwo}
 </p>
-<pre><code class="language-plaintext">
-    sudo pip3 install virtualenv && virtualenv venv 
-  </code></pre>
-<p>Install Python libraries & launch VS Code:</p>
-<pre><code class="language-plaintext">
-  pip install supabase pandas dotenv praw stocksymbol requests && pip freeze >> requirements.txt && code .
-
-</code></pre>
+<Highlight language={bash} code={bashTwo} />
+<p>{textThree}</p>
+<Highlight language={bash} code={bashThree} />
 <p>Create a .env file with all of the environment variables:</p>
-<pre><code class="language-plaintext">
-  SUPABASE_URL=supabase-url
-  SUPABASE_KEY=supabase-anon-key (browser safe)
-  CLIENT_ID=reddit-app-client-id
-  SECRET_TOKEN=reddit-app-secret
-  USERNAME=reddit-username
-  PASSWORD=reddit-password
-
-</code></pre>
+<Highlight code={env} />
 
 <p>Let's open ticker-scraper-stocks.py and import our libraries</p>
 
-<Highlight className="custom-code" language={python} {code} />
+<Highlight language={python} code={pythonOne} />
 
 <h3>Running stock mention numbers</h3>
 

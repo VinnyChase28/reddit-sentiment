@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { supabase } from "./supabaseClient";
-  import Intro from "./components/Intro.svelte";
+  import Guide from "./components/Guide.svelte";
   import StockGraph from "./components/StockGraph.svelte";
   import _ from "lodash";
   import Chart from "svelte-frappe-charts";
@@ -265,7 +265,7 @@
     </nav>
   </div>
   <div class="container">
-    <Intro />
+    <Guide />
     <br />
     <h1>Data Analysis</h1>
     <br />
