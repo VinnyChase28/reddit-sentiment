@@ -16,13 +16,24 @@ a {
   text-decoration: none;
 }
 
-a:hover {
-  text-decoration: underline;
-  color: #6599ff;
+a {
+  color: #8fbcbb;
+  transform: underline;
 }
 
-a:visited {
-  color: #6599ff;
+p {
+  font-family: "Montserrat", sans-serif;
+}
+
+h1 {
+  color: #81a1c1;
+  font-family: "Merriweather", sans-serif;
+  padding: 20px;
+}
+h3 {
+  font-family: "Merriweather", sans-serif;
+  color: #88c0d0;
+  padding: 20px;
 }
 
 label {

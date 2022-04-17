@@ -36,6 +36,9 @@
 
 <svelte:head>
   {@html nord}
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@300&family=Montserrat&display=swap");
+  </style>
 </svelte:head>
 <main>
   <div class="container">
@@ -111,20 +114,6 @@
 </main>
 
 <style>
-  a {
-    color: #8fbcbb;
-    transform: underline;
-  }
-
-  h1 {
-    color: #8fbcbb;
-    font-family: "Montserrat", sans-serif;
-    padding: 20px;
-  }
-  h3 {
-    color: #88c0d0;
-    padding: 20px;
-  }
   .container {
     justify-content: center;
     margin-top: 100px;

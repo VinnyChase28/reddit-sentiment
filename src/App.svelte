@@ -3,7 +3,7 @@
   import Playground from "./components/Playground.svelte";
   import _ from "lodash";
   let navOpen = false;
-  export let menu = 1;
+  export let menu = 2;
   function handleNav() {
     navOpen = !navOpen;
     // 		navWidth === 0 ? navWidth = 40 : navWidth = 0;
@@ -14,6 +14,7 @@
 <svelte:head>
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@300&family=Montserrat&display=swap");
   </style>
 </svelte:head>
 
@@ -28,25 +29,26 @@
 
       {#if navOpen === false}
         <div class="nav__link hide">
-          <a href="/" on:click|preventDefault={() => (menu = 1)}>Guide</a>
+          <a href="/" on:click|preventDefault={() => (menu = 1)}>Playground</a>
         </div>
         <a href="/" class="logo">FinScrape</a>
         <div class="nav__link hide">
-          <a href="/" on:click|preventDefault={() => (menu = 2)}>Playground</a>
+          <a href="/" on:click|preventDefault={() => (menu = 2)}>Guide</a>
         </div>
       {:else if navOpen === true}
         <div class="nav__link">
-          <a href="/" on:click|preventDefault={() => (menu = 1)}>Guide</a>
+          <a href="/" on:click|preventDefault={() => (menu = 1)}>Playground</a>
 
-          <a href="/" on:click|preventDefault={() => (menu = 2)}>Playground</a>
+          <a href="/" on:click|preventDefault={() => (menu = 2)}>Guide</a>
         </div>
       {/if}
     </nav>
+    <div />
   </div>
   {#if menu === 1}
-    <Guide />
-  {:else if menu === 2}
     <Playground />
+  {:else if menu === 2}
+    <Guide />
   {:else}
     <h1>Page Not Found</h1>
   {/if}
@@ -54,16 +56,35 @@
 
 <style>
   main {
-    font-family: "Montserrat", sans-serif;
     background-color: #222222;
     color: white;
+  }
+
+  a {
+    color: #8fbcbb;
+    transform: underline;
+  }
+
+  p {
+    font-family: "Montserrat", sans-serif;
+  }
+
+  h1 {
+    color: #81a1c1;
+    font-family: "Merriweather", sans-serif;
+    padding: 20px;
+  }
+  h3 {
+    font-family: "Merriweather", sans-serif;
+    color: #88c0d0;
+    padding: 20px;
   }
 
   .nav {
     justify-content: center;
     align-items: center;
     background-color: #5e81ac;
-    height: 100px;
+    height: 80px;
   }
 
   .logo {
@@ -128,21 +149,6 @@
     .hamburger {
       display: none;
     }
-  }
-
-  a {
-    color: #88c0d0;
-    transform: underline;
-  }
-
-  a:hover {
-    color: #81a1c1;
-  }
-
-  h1 {
-    color: #81a1c1;
-    font-family: "Montserrat", sans-serif;
-    padding: 20px;
   }
 
   @media (min-width: 640px) {
