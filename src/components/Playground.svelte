@@ -5,6 +5,7 @@
   import VerticalTable from "./Crypto/VerticalTable.svelte";
   import { supabase } from "../supabaseClient";
   import _ from "lodash";
+  import { query } from "./Store";
   export let menu = 1;
 
   let arr2 = [];
@@ -232,26 +233,46 @@
     </li>
   </ul>
 </div>
-{#if menu === 1}
-  <div class="container">
+<div class="container">
+  <h3>Query</h3>
+  <p>Thereddit comment data has been scraped daily since March 22nd, 2022.</p>
+  <form class="content">
+    <label>Date Ranges</label>
+    <input type="text" bind:value={$query.name} />
+    <label>Telefone</label>
+    <input type="text" bind:value={$query.phone} />
+  </form>
+  <p>
+    {JSON.stringify($query, 0, 2)}
+  </p>
+
+  {#if menu === 1}
+    <VerticalTable array={arr2} />
     <VerticalTable array={arrCrypto2} />
-    <VerticalTable array={arrCrypto2} />
-  </div>
-{:else if menu === 2}
-  <div class="container">
-    <p>Charts</p>
-  </div>
-{:else if menu === 3}
-  <div class="container">
+  {:else if menu === 2}
+    <p>
+      <StockGraph
+        s1Percentage={stock1Percentage}
+        s2Percentage={stock2Percentage}
+        s3Percentage={stock3Percentage}
+        s4Percentage={stock4Percentage}
+        s5Percentage={stock5Percentage}
+        s1={stock1}
+        s2={stock2}
+        s3={stock3}
+        s4={stock4}
+        s5={stock5}
+      />
+    </p>
+  {:else if menu === 3}
     <p>Stories</p>
-  </div>
-{:else}
-  <h1>Page Not Found</h1>
-{/if}
+  {:else}
+    <h1>Page Not Found</h1>
+  {/if}
+</div>
 
 <!-- <div id="main">
-    <div class="container">
-      <h1>Data Analysis</h1>
+    <div class="container">chargin
       <br />
       <h3>All time top 5 percentage (stocks):</h3>
 
@@ -302,8 +323,17 @@
     </div>
   </div> -->
 <style>
-  /* The side navigation menu */
-  /* The sidenav */
+  .content {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+  }
+  .content input {
+    padding: 10px;
+  }
+  .content label {
+    padding: 10px;
+  }
   ul {
     margin-top: 100px;
     list-style-type: none;

@@ -1,5 +1,3 @@
-
-
 <script>
   export const stockgraph = "all";
   export let s1Percentage;
@@ -150,7 +148,7 @@
       .graph td {
         width: 100%;
         height: 100%;
-        background: #f63;
+        background: #4c566a;
         border-radius: 0.5em 0.5em 0 0;
         transition: background 0.5s;
       }

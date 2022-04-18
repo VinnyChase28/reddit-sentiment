@@ -3,7 +3,7 @@
   import Playground from "./components/Playground.svelte";
   import _ from "lodash";
   let navOpen = false;
-  export let menu = 1;
+  export let menu = 2;
   function handleNav() {
     navOpen = !navOpen;
     // 		navWidth === 0 ? navWidth = 40 : navWidth = 0;
