@@ -3,7 +3,7 @@
   import Playground from "./components/Playground.svelte";
   import _ from "lodash";
   let navOpen = false;
-  export let menu = 2;
+  export let menu = 1;
   function handleNav() {
     navOpen = !navOpen;
     // 		navWidth === 0 ? navWidth = 40 : navWidth = 0;
@@ -58,6 +58,7 @@
   main {
     background-color: #222222;
     color: white;
+    height: 100%;
   }
 
   a {
@@ -83,7 +84,7 @@
   .nav {
     justify-content: center;
     align-items: center;
-    background-color: #5e81ac;
+    background-color: #2e3440;
     height: 80px;
   }
 

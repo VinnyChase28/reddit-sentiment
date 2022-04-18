@@ -2,8 +2,10 @@
   import { onMount } from "svelte";
   import Chart from "svelte-frappe-charts";
   import StockGraph from "./StockGraph.svelte";
+  import VerticalTable from "./Crypto/VerticalTable.svelte";
   import { supabase } from "../supabaseClient";
   import _ from "lodash";
+  export let menu = 1;
 
   let arr2 = [];
   let barCharArray = [];
@@ -120,7 +122,7 @@
       totalTop5
     );
 
-    arr2 = arr2; //do this because dummy svelte wants a re-render.
+    arr2 = arr2; //do this because svelte wants a re-render.
   });
 
   //get crypto data
@@ -207,100 +209,141 @@
 
     arrCrypto2 = arrCrypto2; //do this because dummy svelte wants a re-render.
   });
+
+  /* Set the width of the side navigation to 250px */
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+  }
+
+  /* Set the width of the side navigation to 0 */
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+  }
 </script>
 
-<main>
+<div id="mySidenav" class="sidenav">
+  <ul>
+    <li>
+      <a href="/" on:click|preventDefault={() => (menu = 1)}>Tables -></a>
+    </li>
+    <li><a href="/" on:click|preventDefault={() => (menu = 2)}>Charts</a></li>
+    <li>
+      <a href="/" on:click|preventDefault={() => (menu = 3)}>Stories</a>
+    </li>
+  </ul>
+</div>
+{#if menu === 1}
   <div class="container">
-    <br />
-    <h1>Data Analysis</h1>
-    <br />
-    <h3>All time top 5 percentage (stocks):</h3>
-
-    <StockGraph
-      s1Percentage={stock1Percentage}
-      s2Percentage={stock2Percentage}
-      s3Percentage={stock3Percentage}
-      s4Percentage={stock4Percentage}
-      s5Percentage={stock5Percentage}
-      s1={stock1}
-      s2={stock2}
-      s3={stock3}
-      s4={stock4}
-      s5={stock5}
-    />
-    <Chart data={data1} type="line" />
-    <h3>Top 20 mentions (stocks):</h3>
-
-    <table id="customers">
-      <th>Ticker </th>
-      <th>All Time Mentions </th>
-      {#each arr2 as { ticker, occurrence }}
-        <tr>
-          <td class="sent bar">{ticker}</td>
-          <td>{occurrence}</td>
-        </tr>
-      {/each}
-    </table>
-    <br />
-    <h3>All time top 5 percentage (crypto):</h3>
-
-    <StockGraph
-      s1Percentage={crypto1Percentage}
-      s2Percentage={crypto2Percentage}
-      s3Percentage={crypto3Percentage}
-      s4Percentage={crypto4Percentage}
-      s5Percentage={crypto5Percentage}
-      s1={crypto1}
-      s2={crypto2}
-      s3={crypto3}
-      s4={crypto4}
-      s5={crypto5}
-    />
-
-    <h3>Top 20 mentions (crypto):</h3>
-
-    <table id="customers">
-      <th>Ticker </th>
-      <th>All Time Mentions </th>
-      {#each arrCrypto2 as { ticker, occurrence }}
-        <tr>
-          <td class="sent bar">{ticker}</td>
-          <td>{occurrence}</td>
-        </tr>
-      {/each}
-    </table>
+    <VerticalTable array={arrCrypto2} />
+    <VerticalTable array={arrCrypto2} />
   </div>
-</main>
+{:else if menu === 2}
+  <div class="container">
+    <p>Charts</p>
+  </div>
+{:else if menu === 3}
+  <div class="container">
+    <p>Stories</p>
+  </div>
+{:else}
+  <h1>Page Not Found</h1>
+{/if}
 
+<!-- <div id="main">
+    <div class="container">
+      <h1>Data Analysis</h1>
+      <br />
+      <h3>All time top 5 percentage (stocks):</h3>
+
+      <StockGraph
+        s1Percentage={stock1Percentage}
+        s2Percentage={stock2Percentage}
+        s3Percentage={stock3Percentage}
+        s4Percentage={stock4Percentage}
+        s5Percentage={stock5Percentage}
+        s1={stock1}
+        s2={stock2}
+        s3={stock3}
+        s4={stock4}
+        s5={stock5}
+      />
+      <Chart data={data1} type="line" />
+      <h3>Top 20 mentions (stocks):</h3>
+
+      <table id="customers">
+        <th>Ticker </th>
+        <th>All Time Mentions </th>
+        {#each arr2 as { ticker, occurrence }}
+          <tr>
+            <td class="sent bar">{ticker}</td>
+            <td>{occurrence}</td>
+          </tr>
+        {/each}
+      </table>
+
+      <br />
+
+      <h3>All time top 5 percentage (crypto):</h3>
+
+      <StockGraph
+        s1Percentage={crypto1Percentage}
+        s2Percentage={crypto2Percentage}
+        s3Percentage={crypto3Percentage}
+        s4Percentage={crypto4Percentage}
+        s5Percentage={crypto5Percentage}
+        s1={crypto1}
+        s2={crypto2}
+        s3={crypto3}
+        s4={crypto4}
+        s5={crypto5}
+      />
+
+      <h3>Top 20 mentions (crypto):</h3>
+    </div>
+  </div> -->
 <style>
-  main {
-    font-family: "Montserrat", sans-serif;
-    background-color: #222222;
+  /* The side navigation menu */
+  /* The sidenav */
+  ul {
+    margin-top: 100px;
+    list-style-type: none;
+    width: 200px;
+    background-color: transparent;
+    position: fixed;
+    height: 100%;
+    align-items: center;
+  }
+
+  li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    color: #81a1c1;
+    font-family: "Merriweather", sans-serif;
+  }
+
+  li a.active {
+    background-color: #04aa6d;
     color: white;
   }
 
-  @media screen and (min-width: 600px) {
-    .nav__link {
-      display: block;
-      position: static;
-      width: auto;
-      margin-right: 20px;
-      background: none;
-    }
-
-    .nav__link a {
-      display: inline-block;
-      padding: 15px 20px;
-      color: white;
-    }
-
-    .hamburger {
-      display: none;
-    }
+  li a:hover:not(.active) {
+    background-color: #555;
+    color: #d8dee9;
   }
 
-  td {
-    height: 10px;
+  .sidenav a:hover {
+    color: #d8dee9;
+  }
+
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidenav {
+      padding-top: 15px;
+    }
+    .sidenav a {
+      font-size: 18px;
+    }
   }
 
   a {
@@ -317,54 +360,19 @@
     font-family: "Merriweather", sans-serif;
     padding: 20px;
   }
+
   h3 {
     font-family: "Merriweather", sans-serif;
     color: #88c0d0;
     padding: 20px;
   }
 
-  table {
-    border-collapse: collapse;
-  }
-
-  tr:nth-child(n + 23) {
-    display: none;
-  }
-
   .container {
+    display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
     margin-top: 100px;
-  }
-
-  #customers {
-    font-family: Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
-
-  #customers td,
-  #customers th {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-
-  #customers tr:nth-child(even) {
-    background-color: black;
-  }
-
-  #customers tr:hover {
-    background-color: #ddd;
-  }
-
-  #customers th {
-    text-align: left;
-    background-color: #ff3e00;
-    color: white;
-  }
-
-  table {
-    width: 100%;
-    border: 1px solid;
   }
 
   @media (min-width: 640px) {

@@ -1,7 +1,5 @@
 <script>
   export const guide = "all";
-  import TickerCode from "./TickerCode.svelte";
-  import CryptoCode from "./CryptoCode.svelte";
   import { onMount } from "svelte";
   import Highlight from "svelte-highlight";
   import bash from "svelte-highlight/languages/bash";
@@ -117,6 +115,8 @@
   .container {
     justify-content: center;
     margin-top: 100px;
+    height: 100%;
+    background-color: #222222;
   }
   iframe {
     margin-top: 20px;
