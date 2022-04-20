@@ -22,17 +22,17 @@ npm install
 npm run dev
 ```
 
-![alt text](https://i.imgur.com/gP4mXwh.png)
+![alt text](https://i.imgur.com/mV0TSfO.png)
 
 ## Known issues / bugs
 
-- Not mobile friendly (especially the bar charts)
+- Not fully mobile friendly yet (especially the bar charts)
 
 ## Roadmap
 
-- Add sentiment analysis (reddit comments are already scraped and available, just need to implement) and set sentiment to "Bearish" or "Bullish" in Supabase
-- Display different graphs and overtime graphs
-- Makes comparisons of # of mentions to stock performance
+- Conduct a sentiment analysis (reddit comments are already scraped and available, just need to implement) and set sentiment to "Bearish" or "Bullish" comment row
+- Display different graphs and chart variations, create 100% from scratch 
+- Makes comparisons of # of mentions to actual stock performance/stock charts
 
 ## List of resources
 
