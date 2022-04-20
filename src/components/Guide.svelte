@@ -29,16 +29,15 @@
     pythonTwelve,
     env,
   } from "./CodeData";
-  console.log(bashOne);
 
-  let frame;
-  onMount(() => {
-    frame.addEventListener("load", onLoad());
-  });
-  function onLoad() {
-    const head = frame.contentDocument.querySelector("head");
-    console.log(head);
-  }
+  // let frame;
+  // onMount(() => {
+  //   frame.addEventListener("load", onLoad());
+  // });
+  // function onLoad() {
+  //   const head = frame.contentDocument.querySelector("head");
+  //   console.log(head);
+  // }
 </script>
 
 <svelte:head>
@@ -50,7 +49,7 @@
 <main>
   <div class="container">
     <h1>Finance forum scraping guide</h1>
-    <iframe
+    <!-- <iframe
       bind:this={frame}
       src="https://flo.uri.sh/visualisation/9412445/embed"
       title="Interactive or visual content"
@@ -59,7 +58,7 @@
       scrolling="no"
       style="width:100%;height:600px;"
       sandbox="allow-same-origin allow-forms allow-scripts allow-downloads allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
-    />
+    /> -->
     <div>{intro}</div>
 
     <h3>Prerequisites:</h3>

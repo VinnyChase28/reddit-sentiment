@@ -6,6 +6,8 @@
   import { supabase } from "../supabaseClient";
   import _ from "lodash";
   import { Jumper } from "svelte-loading-spinners";
+  import Frames from "./Frames.svelte";
+  import FramesCrypto from "./FramesCrypto.svelte";
   export let menu = 1;
   let arr2 = [];
   let barCharArray = [];
@@ -36,6 +38,7 @@
   let daysAfterLoad = 0;
   let loadingStocks = false;
   let loadingCrypto = false;
+
   const getDate = () => {
     let today = new Date();
     let startDate = today.setDate(today.getDate() - days);
@@ -100,7 +103,6 @@
     let totalTop5 = barCharArray
       .map((item) => item.occurrence)
       .reduce((prev, curr) => prev + curr, 0);
-    console.log(totalTop5);
     stock1 = barCharArray[0].ticker;
     stock1Percentage = calculatePercentage(
       barCharArray[0].occurrence,
@@ -132,7 +134,7 @@
   };
 
   //get crypto data
-  const getCrypto = async (days) => {
+  const getCrypto = async () => {
     arrCrypto2 = [];
     loadingCrypto = true;
     const { data, error } = await supabase
@@ -187,7 +189,7 @@
     let totalTop5 = barCharArrayCrypto
       .map((item) => item.occurrence)
       .reduce((prev, curr) => prev + curr, 0);
-    console.log(totalTop5);
+
     crypto1 = barCharArrayCrypto[0].ticker;
     crypto1Percentage = calculatePercentage(
       barCharArrayCrypto[0].occurrence,
@@ -227,13 +229,11 @@
     <button
       class="button"
       on:click={() => {
-        if (days >= 0 && days <= 30) {
+        if (days >= 1 && days <= 40) {
           getStocks();
           getCrypto();
         } else {
-          alert(
-            "Greater than 0, Less than 40 Please. I'm using a free account >:("
-          );
+          alert("Greater than 0, 40 or less. I'm using a free account >:(");
         }
       }}>Get Data</button
     >
@@ -292,9 +292,10 @@
     {:else}<p>Waiting to populate charts...</p>
     {/if}
   {:else if menu === 3}
-    {#if arr2.length > 0 && arrCrypto2.length > 0}
-      <p>stories go here</p>
-    {:else}<p>Waiting to populate stories...</p>{/if}
+    <p>Cumulative daily sum visualisation - stocks</p>
+    <Frames />
+    <p>Cumulative daily sum visualisation - crypto</p>
+    <FramesCrypto />
   {:else}
     <h1>Page Not Found</h1>
   {/if}
@@ -406,5 +407,10 @@
     main {
       max-width: none;
     }
+  }
+
+  iframe {
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 </style>
