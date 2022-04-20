@@ -5,6 +5,7 @@
   import bash from "svelte-highlight/languages/bash";
   import python from "svelte-highlight/languages/python";
   import nord from "svelte-highlight/styles/nord";
+  import FramesCrypto from "./FramesCrypto.svelte";
   import {
     intro,
     textOne,
@@ -29,15 +30,6 @@
     pythonTwelve,
     env,
   } from "./CodeData";
-
-  // let frame;
-  // onMount(() => {
-  //   frame.addEventListener("load", onLoad());
-  // });
-  // function onLoad() {
-  //   const head = frame.contentDocument.querySelector("head");
-  //   console.log(head);
-  // }
 </script>
 
 <svelte:head>
@@ -49,16 +41,7 @@
 <main>
   <div class="container">
     <h1>Finance forum scraping guide</h1>
-    <!-- <iframe
-      bind:this={frame}
-      src="https://flo.uri.sh/visualisation/9412445/embed"
-      title="Interactive or visual content"
-      class="flourish-embed-iframe"
-      frameborder="0"
-      scrolling="no"
-      style="width:100%;height:600px;"
-      sandbox="allow-same-origin allow-forms allow-scripts allow-downloads allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
-    /> -->
+    <FramesCrypto />
     <div>{intro}</div>
 
     <h3>Prerequisites:</h3>

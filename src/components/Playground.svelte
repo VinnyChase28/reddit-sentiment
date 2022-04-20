@@ -60,6 +60,7 @@
   `
       )
       .gt("created_at", getDate());
+    if (error) console.log(error);
     const response = await data;
     function findOcc(arr, key) {
       arr.forEach((x) => {

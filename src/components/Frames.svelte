@@ -27,5 +27,6 @@
   iframe {
     margin-top: 20px;
     margin-bottom: 30px;
+    border-radius: 10px;
   }
 </style>

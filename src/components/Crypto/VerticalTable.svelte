@@ -18,13 +18,18 @@
 <style>
   #customers {
     font-family: Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
+    border-radius: 10px;
     width: 100%;
     max-height: 300px;
     max-width: 300px;
     box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px #2e3440,
       0.3em 0.3em 1em #d8dee9;
     margin-bottom: 30px;
+
+    /* The default, as in, you get this without defining anything */
+    transition-timing-function: ease;
+    /* Also the same as */
+    transition-timing-function: cubic-bezier(0.5, 0.1, 0.25, 1);
   }
 
   #customers td,
@@ -53,10 +58,5 @@
     width: 100%;
     border: 1px solid;
     border-collapse: collapse;
-    /* The default, as in, you get this without defining anything */
-    transition-timing-function: ease;
-
-    /* Also the same as */
-    transition-timing-function: cubic-bezier(0.5, 0.1, 0.25, 1);
   }
 </style>
