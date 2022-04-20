@@ -34,16 +34,20 @@
   let crypto5Percentage;
 
   let days = 0;
-  let loading = false;
+  let daysAfterLoad = 0;
+  let loadingStocks = false;
+  let loadingCrypto = false;
   const getDate = () => {
     let today = new Date();
     let startDate = today.setDate(today.getDate() - days);
     let isoDate = new Date(startDate).toISOString();
+    daysAfterLoad = days.toString();
     return isoDate;
   };
 
   const getStocks = async () => {
     arr2 = [];
+    loadingStocks = true;
     const { data, error } = await supabase
       .from("ticker_mentions")
       .select(
@@ -123,15 +127,15 @@
       barCharArray[4].occurrence,
       totalTop5
     );
-
     arr2 = arr2; //do this because svelte wants a re-render.
+    loadingStocks = false;
     console.log(arr2);
   };
 
   //get crypto data
   const getCrypto = async (days) => {
     arrCrypto2 = [];
-    loading = true;
+    loadingCrypto = true;
     const { data, error } = await supabase
       .from("crypto_mentions")
       .select(
@@ -212,16 +216,15 @@
     );
 
     arrCrypto2 = arrCrypto2; //do this because dummy svelte wants a re-render.
-    loading = false;
+    loadingCrypto = false;
     console.log(arrCrypto2);
   };
 </script>
 
 <div class="container">
-  <p>Fetch {days} days worth of data:</p>
-  <input type="text" bind:value={days} />
-
-  {#if loading === false}
+  {#if loadingStocks === false && loadingCrypto === false}
+    <p>Fetch {days} days worth of data:</p>
+    <input type="text" bind:value={days} />
     <button
       class="button"
       on:click={() => {
@@ -236,7 +239,7 @@
       }}>Get Data</button
     >
   {:else}
-    <Jumper size="60" color="#d8dee9" unit="px" duration="1s" />
+    <Jumper size="100" color="#d8dee9" unit="px" duration="1s" />
   {/if}
 </div>
 
@@ -254,14 +257,14 @@
 <div class="container">
   {#if menu === 1}
     {#if arr2.length > 0 && arrCrypto2.length > 0}
-      <p>Top 10 Most mentioned stocks in last {days} days</p>
+      <p>Top 10 Most mentioned stocks in last {daysAfterLoad} days</p>
       <VerticalTable array={arr2} />
-      <p>Top 10 Most mentioned crypto in last {days} days</p>
+      <p>Top 10 Most mentioned crypto in last {daysAfterLoad} days</p>
       <VerticalTable array={arrCrypto2} />
     {:else}<p>Waiting to populate tables...</p>{/if}
   {:else if menu === 2}
     {#if barCharArray.length > 0 && barCharArrayCrypto.length > 0}
-      <p>Top 5 Most mentioned stocks % in last {days} days</p>
+      <p>Top 5 Most mentioned stocks % in last {daysAfterLoad} days</p>
       <StockGraph
         s1Percentage={stock1Percentage}
         s2Percentage={stock2Percentage}
@@ -291,8 +294,7 @@
     {/if}
   {:else if menu === 3}
     {#if arr2.length > 0 && arrCrypto2.length > 0}
-      <VerticalTable array={arr2} />
-      <VerticalTable array={arrCrypto2} />
+      <p>stories go here</p>
     {:else}<p>Waiting to populate stories...</p>{/if}
   {:else}
     <h1>Page Not Found</h1>
