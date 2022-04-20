@@ -6,8 +6,9 @@
   import { supabase } from "../supabaseClient";
   import _ from "lodash";
   import { query } from "./Store";
-  export let menu = 1;
+  import App from "../App.svelte";
 
+  export let menu = 1;
   let arr2 = [];
   let barCharArray = [];
   let stock1;
@@ -33,16 +34,16 @@
   let crypto4Percentage;
   let crypto5Percentage;
 
-  let data1 = {
-    labels: ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"],
-    datasets: [
-      {
-        values: [10, 12, 3, 9, 8, 15, 9],
-      },
-    ],
+  let days = 0;
+  const getDate = () => {
+    let today = new Date();
+    let startDate = today.setDate(today.getDate() - days);
+    let isoDate = new Date(startDate).toISOString();
+    return isoDate;
   };
 
-  onMount(async () => {
+  const getStocks = async () => {
+    arr2 = [];
     const { data, error } = await supabase
       .from("ticker_mentions")
       .select(
@@ -52,8 +53,9 @@
     created_at
   `
       )
-      .limit(100);
+      .gt("created_at", getDate());
     const response = await data;
+    console.log(response);
     function findOcc(arr, key) {
       arr.forEach((x) => {
         // Checking if there is any object in arr2
@@ -124,10 +126,12 @@
     );
 
     arr2 = arr2; //do this because svelte wants a re-render.
-  });
+    console.log(arr2);
+  };
 
   //get crypto data
-  onMount(async () => {
+  const getCrypto = async (days) => {
+    arrCrypto2 = [];
     const { data, error } = await supabase
       .from("crypto_mentions")
       .select(
@@ -137,7 +141,7 @@
     created_at
   `
       )
-      .limit(100);
+      .gt("created_at", getDate());
     const response = await data;
     function findOcc(arr, key) {
       arr.forEach((x) => {
@@ -164,7 +168,6 @@
           arrCrypto2.push(a);
         }
         arrCrypto2 = _.sortBy(arrCrypto2, "occurrence").reverse();
-
         return arrCrypto2;
       });
     }
@@ -209,18 +212,25 @@
     );
 
     arrCrypto2 = arrCrypto2; //do this because dummy svelte wants a re-render.
-  });
-
-  /* Set the width of the side navigation to 250px */
-  function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-  }
-
-  /* Set the width of the side navigation to 0 */
-  function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-  }
+    console.log(arrCrypto2);
+  };
 </script>
+
+<div class="container">
+  <p>How many days of data would you like:</p>
+  <input type="text" bind:value={days} />
+  <button
+    on:click={() => {
+      if (days >= 0 && days <= 30) {
+        getStocks();
+        getCrypto();
+      } else {
+        alert("nononono");
+      }
+    }}>Get Data</button
+  >
+  <p>I will fetch {days} days worth of data</p>
+</div>
 
 <div id="mySidenav" class="sidenav">
   <ul>
@@ -234,23 +244,13 @@
   </ul>
 </div>
 <div class="container">
-  <h3>Query</h3>
-  <p>Thereddit comment data has been scraped daily since March 22nd, 2022.</p>
-  <form class="content">
-    <label>Date Ranges</label>
-    <input type="text" bind:value={$query.name} />
-    <label>Telefone</label>
-    <input type="text" bind:value={$query.phone} />
-  </form>
-  <p>
-    {JSON.stringify($query, 0, 2)}
-  </p>
-
   {#if menu === 1}
-    <VerticalTable array={arr2} />
-    <VerticalTable array={arrCrypto2} />
+    {#if arr2.length > 0 && arrCrypto2.length > 0}
+      <VerticalTable array={arr2} />
+      <VerticalTable array={arrCrypto2} />
+    {:else}<p>Waiting to populate tables...</p>{/if}
   {:else if menu === 2}
-    <p>
+    {#if barCharArray.length > 0 && barCharArrayCrypto.length > 0}
       <StockGraph
         s1Percentage={stock1Percentage}
         s2Percentage={stock2Percentage}
@@ -263,7 +263,20 @@
         s4={stock4}
         s5={stock5}
       />
-    </p>
+      <StockGraph
+        s1Percentage={crypto1Percentage}
+        s2Percentage={crypto2Percentage}
+        s3Percentage={crypto3Percentage}
+        s4Percentage={crypto4Percentage}
+        s5Percentage={crypto5Percentage}
+        s1={crypto1}
+        s2={crypto2}
+        s3={crypto3}
+        s4={crypto4}
+        s5={crypto5}
+      />
+    {:else}<p>Waiting to populate charts...</p>
+    {/if}
   {:else if menu === 3}
     <p>Stories</p>
   {:else}
@@ -330,11 +343,11 @@
   }
   .content input {
     padding: 10px;
+    justify-content: center;
+    text-align: center;
   }
-  .content label {
-    padding: 10px;
-  }
-  ul {
+
+  .sidenav ul {
     margin-top: 100px;
     list-style-type: none;
     width: 200px;
@@ -344,7 +357,7 @@
     align-items: center;
   }
 
-  li a {
+  .sidenav li a {
     display: block;
     color: #000;
     padding: 8px 16px;
@@ -352,7 +365,7 @@
     font-family: "Merriweather", sans-serif;
   }
 
-  li a.active {
+  .sidenav li a.active {
     background-color: #04aa6d;
     color: white;
   }
@@ -383,6 +396,7 @@
 
   p {
     font-family: "Montserrat", sans-serif;
+    padding: 10px;
   }
 
   h1 {
@@ -403,6 +417,12 @@
     flex-direction: column;
     align-items: center;
     margin-top: 100px;
+    max-width: 600px;
+  }
+
+  .container input {
+    max-width: 300px;
+    text-align: center;
   }
 
   @media (min-width: 640px) {

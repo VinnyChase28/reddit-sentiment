@@ -40,6 +40,7 @@
     "@supabase/supabase-js": "^1.31.2",
     "@types/highlight.js": "^10.1.0",
     "chart.js": "^3.7.1",
+    "datejs": "^1.0.0-rc3",
     "framework7": "^6.3.16",
     "framework7-svelte": "^6.3.16",
     "fusioncharts": "^3.18.0",
