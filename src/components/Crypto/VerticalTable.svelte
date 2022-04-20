@@ -1,6 +1,5 @@
 <script>
   import { slice } from "lodash";
-
   export let array = [];
   export let tableRowCount = 10;
 </script>
@@ -54,5 +53,10 @@
     width: 100%;
     border: 1px solid;
     border-collapse: collapse;
+    /* The default, as in, you get this without defining anything */
+    transition-timing-function: ease;
+
+    /* Also the same as */
+    transition-timing-function: cubic-bezier(0.5, 0.1, 0.25, 1);
   }
 </style>
