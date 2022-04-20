@@ -18,6 +18,15 @@
     pythonOne,
     pythonTwo,
     pythonThree,
+    pythonFour,
+    pythonFive,
+    pythonSix,
+    pythonSeven,
+    pythonEight,
+    pythonNine,
+    pythonTen,
+    pythonEleven,
+    pythonTwelve,
     env,
   } from "./CodeData";
   console.log(bashOne);
@@ -95,6 +104,7 @@
     <Highlight language={bash} code={bashThree} />
     <p>Create a .env file with all of the environment variables:</p>
     <Highlight code={env} />
+    <h3>Python Code</h3>
     <p>Let's open ticker-scraper-stocks.py and import our libraries</p>
     <Highlight language={python} code={pythonOne} />
     <p>
@@ -108,10 +118,35 @@
       the fetched posts contains comments.
     </p>
     <Highlight language={python} code={pythonThree} />
+    <p>
+      Once we know all the submissions have comments, we can add all the
+      submission id's to a new array:
+    </p>
+    <Highlight language={python} code={pythonFour} />
+    <p>
+      We can define a function called <strong>words_in_string</strong> that will
+      allow us to break the reddit comment in an array of strings. We check to see
+      if one of the words in the array exists in our previously generated stock symbol
+      list. If so, we grab that whole comment, the ticker and send it off to lower
+      Supabase's IQ.
+    </p>
+    <Highlight language={python} code={pythonFive} />
+    <p>
+      (Optional) To schedule your Heroku script to run daily as a cron job,
+      you'll have to install a scheduler, declare a runtime and create a
+      Procfile.
+    </p>
+    <Highlight language={python} code={pythonSix} />
+
+    <p />
+    <div class="empty-space" />
   </div>
 </main>
 
 <style>
+  .empty-space {
+    padding: 200px;
+  }
   .container {
     justify-content: center;
     margin-top: 100px;

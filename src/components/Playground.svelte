@@ -6,7 +6,6 @@
   import { supabase } from "../supabaseClient";
   import _ from "lodash";
   import { Jumper } from "svelte-loading-spinners";
-
   export let menu = 1;
   let arr2 = [];
   let barCharArray = [];
