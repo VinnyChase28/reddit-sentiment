@@ -5,8 +5,6 @@
   import VerticalTable from "./Crypto/VerticalTable.svelte";
   import { supabase } from "../supabaseClient";
   import _ from "lodash";
-  import { query } from "./Store";
-  import App from "../App.svelte";
 
   export let menu = 1;
   let arr2 = [];
@@ -55,7 +53,6 @@
       )
       .gt("created_at", getDate());
     const response = await data;
-    console.log(response);
     function findOcc(arr, key) {
       arr.forEach((x) => {
         // Checking if there is any object in arr2
@@ -217,25 +214,27 @@
 </script>
 
 <div class="container">
-  <p>How many days of data would you like:</p>
+  <p>Fetch {days} days worth of data:</p>
   <input type="text" bind:value={days} />
   <button
+    class="button"
     on:click={() => {
       if (days >= 0 && days <= 30) {
         getStocks();
         getCrypto();
       } else {
-        alert("nononono");
+        alert(
+          "Greater than 0, Less than 30 Please. I'm using a free account >:("
+        );
       }
     }}>Get Data</button
   >
-  <p>I will fetch {days} days worth of data</p>
 </div>
 
 <div id="mySidenav" class="sidenav">
   <ul>
     <li>
-      <a href="/" on:click|preventDefault={() => (menu = 1)}>Tables -></a>
+      <a href="/" on:click|preventDefault={() => (menu = 1)}>Tables</a>
     </li>
     <li><a href="/" on:click|preventDefault={() => (menu = 2)}>Charts</a></li>
     <li>
@@ -246,11 +245,14 @@
 <div class="container">
   {#if menu === 1}
     {#if arr2.length > 0 && arrCrypto2.length > 0}
+      <p>Top 10 Most mentioned stocks in last {days} days</p>
       <VerticalTable array={arr2} />
+      <p>Top 10 Most mentioned crypto in last {days} days</p>
       <VerticalTable array={arrCrypto2} />
     {:else}<p>Waiting to populate tables...</p>{/if}
   {:else if menu === 2}
     {#if barCharArray.length > 0 && barCharArrayCrypto.length > 0}
+      <p>Top 5 Most mentioned stocks % in last {days} days</p>
       <StockGraph
         s1Percentage={stock1Percentage}
         s2Percentage={stock2Percentage}
@@ -263,6 +265,7 @@
         s4={stock4}
         s5={stock5}
       />
+      <p>Top 5 Most mentioned crypto % in last {days} days</p>
       <StockGraph
         s1Percentage={crypto1Percentage}
         s2Percentage={crypto2Percentage}
@@ -278,73 +281,47 @@
     {:else}<p>Waiting to populate charts...</p>
     {/if}
   {:else if menu === 3}
-    <p>Stories</p>
+    {#if arr2.length > 0 && arrCrypto2.length > 0}
+      <VerticalTable array={arr2} />
+      <VerticalTable array={arrCrypto2} />
+    {:else}<p>Waiting to populate stories...</p>{/if}
   {:else}
     <h1>Page Not Found</h1>
   {/if}
 </div>
 
-<!-- <div id="main">
-    <div class="container">chargin
-      <br />
-      <h3>All time top 5 percentage (stocks):</h3>
-
-      <StockGraph
-        s1Percentage={stock1Percentage}
-        s2Percentage={stock2Percentage}
-        s3Percentage={stock3Percentage}
-        s4Percentage={stock4Percentage}
-        s5Percentage={stock5Percentage}
-        s1={stock1}
-        s2={stock2}
-        s3={stock3}
-        s4={stock4}
-        s5={stock5}
-      />
-      <Chart data={data1} type="line" />
-      <h3>Top 20 mentions (stocks):</h3>
-
-      <table id="customers">
-        <th>Ticker </th>
-        <th>All Time Mentions </th>
-        {#each arr2 as { ticker, occurrence }}
-          <tr>
-            <td class="sent bar">{ticker}</td>
-            <td>{occurrence}</td>
-          </tr>
-        {/each}
-      </table>
-
-      <br />
-
-      <h3>All time top 5 percentage (crypto):</h3>
-
-      <StockGraph
-        s1Percentage={crypto1Percentage}
-        s2Percentage={crypto2Percentage}
-        s3Percentage={crypto3Percentage}
-        s4Percentage={crypto4Percentage}
-        s5Percentage={crypto5Percentage}
-        s1={crypto1}
-        s2={crypto2}
-        s3={crypto3}
-        s4={crypto4}
-        s5={crypto5}
-      />
-
-      <h3>Top 20 mentions (crypto):</h3>
-    </div>
-  </div> -->
 <style>
-  .content {
-    display: flex;
+  button {
+    transition: all 0.5s ease;
+    color: #d8dee9;
+    border: 3px solid #d8dee9;
+    font-family: "Montserrat", sans-serif;
+    text-transform: uppercase;
     text-align: center;
-    flex-direction: column;
-  }
-  .content input {
+    line-height: 1;
+    font-size: 17px;
+    background-color: transparent;
     padding: 10px;
+    outline: none;
+    border-radius: 4px;
+    margin-top: 20px;
+  }
+
+  button:hover {
+    color: #001f3f;
+    background-color: #d8dee9;
+  }
+  .container {
+    display: flex;
     justify-content: center;
-    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+    max-width: 600px;
+  }
+
+  .container input {
+    max-width: 80px;
   }
 
   .sidenav ul {
@@ -396,7 +373,6 @@
 
   p {
     font-family: "Montserrat", sans-serif;
-    padding: 10px;
   }
 
   h1 {
@@ -409,15 +385,6 @@
     font-family: "Merriweather", sans-serif;
     color: #88c0d0;
     padding: 20px;
-  }
-
-  .container {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 100px;
-    max-width: 600px;
   }
 
   .container input {
