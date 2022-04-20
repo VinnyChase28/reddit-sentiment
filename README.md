@@ -1,5 +1,5 @@
 ## Get started
-[Live Demo](www.finscrape.com)
+[Live Demo](https://www.finscrape.com)
 To serve the project:
 
 Prerequisites:
