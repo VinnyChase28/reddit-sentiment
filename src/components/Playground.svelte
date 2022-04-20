@@ -224,7 +224,7 @@
         getCrypto();
       } else {
         alert(
-          "Greater than 0, Less than 30 Please. I'm using a free account >:("
+          "Greater than 0, Less than 40 Please. I'm using a free account >:("
         );
       }
     }}>Get Data</button
