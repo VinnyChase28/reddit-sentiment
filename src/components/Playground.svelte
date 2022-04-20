@@ -5,6 +5,7 @@
   import VerticalTable from "./Crypto/VerticalTable.svelte";
   import { supabase } from "../supabaseClient";
   import _ from "lodash";
+  import { Jumper } from "svelte-loading-spinners";
 
   export let menu = 1;
   let arr2 = [];
@@ -33,6 +34,7 @@
   let crypto5Percentage;
 
   let days = 0;
+  let loading = false;
   const getDate = () => {
     let today = new Date();
     let startDate = today.setDate(today.getDate() - days);
@@ -129,6 +131,7 @@
   //get crypto data
   const getCrypto = async (days) => {
     arrCrypto2 = [];
+    loading = true;
     const { data, error } = await supabase
       .from("crypto_mentions")
       .select(
@@ -209,6 +212,7 @@
     );
 
     arrCrypto2 = arrCrypto2; //do this because dummy svelte wants a re-render.
+    loading = false;
     console.log(arrCrypto2);
   };
 </script>
@@ -216,19 +220,24 @@
 <div class="container">
   <p>Fetch {days} days worth of data:</p>
   <input type="text" bind:value={days} />
-  <button
-    class="button"
-    on:click={() => {
-      if (days >= 0 && days <= 30) {
-        getStocks();
-        getCrypto();
-      } else {
-        alert(
-          "Greater than 0, Less than 40 Please. I'm using a free account >:("
-        );
-      }
-    }}>Get Data</button
-  >
+
+  {#if loading === false}
+    <button
+      class="button"
+      on:click={() => {
+        if (days >= 0 && days <= 30) {
+          getStocks();
+          getCrypto();
+        } else {
+          alert(
+            "Greater than 0, Less than 40 Please. I'm using a free account >:("
+          );
+        }
+      }}>Get Data</button
+    >
+  {:else}
+    <Jumper size="60" color="#d8dee9" unit="px" duration="1s" />
+  {/if}
 </div>
 
 <div id="mySidenav" class="sidenav">
