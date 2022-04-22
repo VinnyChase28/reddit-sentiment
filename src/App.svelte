@@ -61,23 +61,9 @@
     height: 100%;
   }
 
-  a {
-    color: #8fbcbb;
-    transform: underline;
-  }
-
-  p {
-    font-family: "Montserrat", sans-serif;
-  }
-
   h1 {
     color: #81a1c1;
     font-family: "Merriweather", sans-serif;
-    padding: 20px;
-  }
-  h3 {
-    font-family: "Merriweather", sans-serif;
-    color: #88c0d0;
     padding: 20px;
   }
 
@@ -116,6 +102,15 @@
     top: 5rem;
     left: 18px;
     background-color: #222222;
+  }
+
+  a {
+    color: #3b4252 !important;
+  }
+
+  a:hover {
+    color: #d8dee9 !important;
+    text-transform: underline !important;
   }
 
   .nav__link a {

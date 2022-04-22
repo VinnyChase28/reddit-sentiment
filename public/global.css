@@ -18,14 +18,13 @@ body {
 }
 
 a {
-  text-decoration: none;
+  color: #3b4252 !important;
 }
 
-a {
-  color: #8fbcbb;
-  transform: underline;
+a:hover {
+  color: #d8dee9 !important;
+  text-transform: underline !important;
 }
-
 p {
   font-family: "Montserrat", sans-serif;
 }
