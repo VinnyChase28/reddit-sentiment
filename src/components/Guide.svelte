@@ -13,6 +13,8 @@
     textThree,
     textFour,
     textFive,
+    textSix,
+    textSeven,
     bashOne,
     bashTwo,
     bashThree,
@@ -25,9 +27,6 @@
     pythonSeven,
     pythonEight,
     pythonNine,
-    pythonTen,
-    pythonEleven,
-    pythonTwelve,
     env,
   } from "./CodeData";
 </script>
@@ -118,9 +117,45 @@
       you'll have to install a scheduler, declare a runtime and create a
       Procfile.
     </p>
+    <p>In the root directory, create a Procfile:</p>
+    <Highlight code={textSix} />
+    <p>Then, create a runtime.txt file and choose the runtime:</p>
+    <Highlight code={textSeven} />
+
+    <p>Full code:</p>
     <Highlight language={python} code={pythonSix} />
 
-    <p />
+    <h3>Bonus:</h3>
+
+    <p>
+      To create a cool visualization using the data we have scraped, we can use <a
+        href="https://app.flourish.studio/@flourish/bar-chart-race"
+        target="_blank"
+      >
+        Flourish</a
+      >'s racing bar chart. This chart accepts a CSV that requires a cumulative
+      sum of occurrences of a stock (y-axis) over a period of time (x-axis).
+      Pandas makes it very easy to work with .csv files.
+    </p>
+
+    <p>
+      Let's open to-csv.py and declare our imports again, as well as initialize
+      Supabase:
+    </p>
+    <Highlight language={python} code={pythonSeven} />
+
+    <p>
+      Next, we need to ensure that all of our columns and rows are unique based
+      on the data we fetched from Supabase:
+    </p>
+    <Highlight language={python} code={pythonEight} />
+
+    <p>
+      Finally, we can create a dataframe using Pandas and create a CSV once we
+      know the dataframe has the data we want:
+    </p>
+    <Highlight language={python} code={pythonNine} />
+
     <div class="empty-space" />
   </div>
 </main>

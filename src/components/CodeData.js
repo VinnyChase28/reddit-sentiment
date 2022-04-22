@@ -10,11 +10,19 @@ export const textFour =
   "Create a .env file with all of the environment variables:";
 export const textFive =
   "Now we are ready to create a list of all existing stocks as well as connect to the Reddit API via PRAW:";
+export const textSix = `crypto: python ticker-scraper-crypto.py
+ticker: python ticker-scraper-reddit.py`;
+
+export const textSeven = "python-3.10.3";
 export const bashOne =
   "mkdir python-scraper && cd python-scraper && touch to-csv-crypto.py to-csv-stocks.py ticker-scraper-crypto.py ticker-scraper-stocks.py";
-export const bashTwo = "sudo pip3 install virtualenv && virtualenv venv";
+export const bashTwo =
+  "sudo pip3 install virtualenv && virtualenv venv && source venv/bin/activate";
 export const bashThree =
-  "pip install supabase pandas dotenv praw stocksymbol requests && pip freeze >> requirements.txt && code .";
+  "sudo apt-get install python3-pandas && pip install apscheduler supabase python-dotenv praw stocksymbol requests twilio && pip freeze > requirements.txt && code .";
+
+export const bashFour = "pip install apscheduler";
+
 export const env = `SUPABASE_URL=supabase-url
 SUPABASE_KEY=supabase-anon-key (browser safe)
 CLIENT_ID=reddit-app-client-id
@@ -154,32 +162,71 @@ def scheduled_job():
 
 sched.start()`;
 
-export const pythonSeven = `submissions = []
-for url in urls:
-  submissions.append(reddit.submission(url=url))
-print(submissions)`;
+export const pythonSeven = `from dotenv import load_dotenv
+import os
+from supabase import create_client, Client
+import pandas as pd
 
-export const pythonEight = `submissions = []
-for url in urls:
-  submissions.append(reddit.submission(url=url))
-print(submissions)`;
+load_dotenv()  # take environment variables from .env.
+#Initialize supabase
+url: str = os.environ.get("SUPABASE_URL")
+key: str = os.environ.get("SUPABASE_KEY")
+supabase: Client = create_client(url, key)
+data = supabase.table("ticker_mentions").select("created_at, ticker" ).execute()`;
 
-export const pythonNine = `submissions = []
-for url in urls:
-  submissions.append(reddit.submission(url=url))
-print(submissions)`;
+export const pythonEight = `to_list = list(data)
+real_data = to_list[0]
+def Convert(a):
+    it = iter(a)
+    res_dct = dict(zip(it, it))
+    return res_dct["data"]
+test = Convert(real_data)
 
-export const pythonTen = `submissions = []
-for url in urls:
-  submissions.append(reddit.submission(url=url))
-print(submissions)`;
+# get all unique tickers
+tickers = []
+for i in test:
+  tickers.append(i["ticker"])
+tickerset = list(set(tickers))
+tickerset.sort()
+#get all unique dates
+dates = []
+for i in test:
+  dates.append(i["created_at"].rpartition('T')[0])
+dateset = list(set(dates))
+dateset.sort()`;
 
-export const pythonEleven = `submissions = []
-for url in urls:
-  submissions.append(reddit.submission(url=url))
-print(submissions)`;
+export const pythonNine = `#create a csv using pandas and increment the cell intersection by 1 each time
+df = pd.DataFrame(index=tickerset, columns=dateset)
+df.loc[:,:] = 0
 
-export const pythonTwelve = `submissions = []
-for url in urls:
-  submissions.append(reddit.submission(url=url))
-print(submissions)`;
+for i in test:
+  h = i['ticker']
+  j = i['created_at'].rpartition('T')[0]
+  if h in tickerset and j in dateset:
+      df.loc[h,j] += 1
+
+df.cumsum(axis=1).to_csv(path_or_buf='test.csv')`;
+
+export const pythonTen = `#create a csv using pandas and increment the cell intersection by 1 each time
+df = pd.DataFrame(index=tickerset, columns=dateset)
+df.loc[:,:] = 0
+
+for i in test:
+  h = i['ticker']
+  j = i['created_at'].rpartition('T')[0]
+  if h in tickerset and j in dateset:
+      df.loc[h,j] += 1
+
+df.cumsum(axis=1).to_csv(path_or_buf='test.csv')`;
+
+export const pythonEleven = `#create a csv using pandas and increment the cell intersection by 1 each time
+df = pd.DataFrame(index=tickerset, columns=dateset)
+df.loc[:,:] = 0
+
+for i in test:
+  h = i['ticker']
+  j = i['created_at'].rpartition('T')[0]
+  if h in tickerset and j in dateset:
+      df.loc[h,j] += 1
+
+df.cumsum(axis=1).to_csv(path_or_buf='test.csv')`;
