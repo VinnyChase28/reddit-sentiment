@@ -174,13 +174,4 @@
     margin-top: 20px;
     margin-bottom: 20px;
   }
-
-  a {
-    color: #3b4252 !important;
-  }
-
-  a:hover {
-    color: #d8dee9 !important;
-    text-transform: underline !important;
-  }
 </style>

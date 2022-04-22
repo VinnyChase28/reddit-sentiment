@@ -104,15 +104,6 @@
     background-color: #222222;
   }
 
-  a {
-    color: #3b4252 !important;
-  }
-
-  a:hover {
-    color: #d8dee9 !important;
-    text-transform: underline !important;
-  }
-
   .nav__link a {
     display: block;
     text-align: center;
